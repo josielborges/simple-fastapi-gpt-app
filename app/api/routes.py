@@ -7,15 +7,15 @@ router = APIRouter(prefix='/openai')
 
 
 class OpenAIRequest(BaseModel):
-    prompt: str
+    text: str
 
 
 class OpenAIResponse(BaseModel):
     content: str
 
 
-@router.post('/requisicao', response_model=OpenAIResponse)
+@router.post('/query', response_model=OpenAIResponse)
 def consult_openai(request: OpenAIRequest):
     openai_service = OpenAIService()
-    content = openai_service.get_text(request.prompt)
+    content = openai_service.get_text(request.text)
     return OpenAIResponse(content=content)
